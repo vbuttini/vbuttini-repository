@@ -4,9 +4,8 @@ import br.com.vbuttini.vbuttinirepository.dto.UserDto;
 import br.com.vbuttini.vbuttinirepository.mapper.UserMapper;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
+import br.com.vbuttini.vbuttinirepository.service.exception.DataBaseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -53,7 +52,7 @@ public class UserService {
 
     private void verifyExistence(String email) {
         if (userRepository.existsByEmail(email)) {
-            throw new RuntimeException("Usuário já existe!");
+            throw new DataBaseException("Usuário já existe!");
         }
     }
 

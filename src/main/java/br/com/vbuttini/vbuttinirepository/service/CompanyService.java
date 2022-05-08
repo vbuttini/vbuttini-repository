@@ -1,6 +1,5 @@
 package br.com.vbuttini.vbuttinirepository.service;
 
-import br.com.vbuttini.vbuttinirepository.dto.CompanyDto;
 import br.com.vbuttini.vbuttinirepository.model.CompanyModel;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import br.com.vbuttini.vbuttinirepository.repository.CompanyRepository;
