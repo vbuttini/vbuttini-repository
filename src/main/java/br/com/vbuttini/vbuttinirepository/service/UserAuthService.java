@@ -1,19 +1,14 @@
-package br.com.buttini.roupaBackend.service;
+package br.com.vbuttini.vbuttinirepository.service;
 
-import br.com.buttini.roupaBackend.dto.DepartmentDto;
-import br.com.buttini.roupaBackend.dto.UserDto;
-import br.com.buttini.roupaBackend.entity.User;
-import br.com.buttini.roupaBackend.mapper.DepartmentMapper;
-import br.com.buttini.roupaBackend.mapper.UserMapper;
-import br.com.buttini.roupaBackend.repository.UserRepository;
+import br.com.vbuttini.vbuttinirepository.dto.UserDto;
+import br.com.vbuttini.vbuttinirepository.mapper.UserMapper;
+import br.com.vbuttini.vbuttinirepository.model.UserModel;
+import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import static br.com.buttini.roupaBackend.util.Constants.EMPLOY_RETURN;
-import static br.com.buttini.roupaBackend.util.Constants.TEAM_NOT_RETURN;
 
 /**
  * @author Vinícius Buttini
@@ -28,24 +23,14 @@ public class UserAuthService {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private DepartmentMapper departmentMapper;
-
     public UserDto getAuth(){
-        return userMapper.convertToDto(getAuthModel(), EMPLOY_RETURN);
+        return userMapper.convertToDto(getAuthModel());
     }
 
-    public User getAuthModel(){
+    public UserModel getAuthModel(){
         return userRepository.findByEmail(
                 ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername()
-        ).get();
-    }
-
-    public DepartmentDto getDepartmentByAuth(){
-        return departmentMapper.convertToDto(
-                getAuthModel().getDepartment(),
-                TEAM_NOT_RETURN
-        );
+        ).orElseThrow(()-> new RuntimeException("Usuário não encontrado"));
     }
 
 }

@@ -1,6 +1,6 @@
-package br.com.buttini.roupaBackend.config.security;
+package br.com.vbuttini.vbuttinirepository.config.security;
 
-import br.com.buttini.roupaBackend.repository.UserRepository;
+import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

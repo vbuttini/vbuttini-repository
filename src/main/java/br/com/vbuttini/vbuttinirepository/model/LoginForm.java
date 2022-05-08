@@ -1,4 +1,4 @@
-package br.com.buttini.roupaBackend.entity;
+package br.com.vbuttini.vbuttinirepository.model;
 
 import lombok.Getter;
 import lombok.Setter;

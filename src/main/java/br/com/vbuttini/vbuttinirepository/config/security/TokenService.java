@@ -1,8 +1,7 @@
-package br.com.buttini.roupaBackend.config.security;
+package br.com.vbuttini.vbuttinirepository.config.security;
 
-import br.com.buttini.roupaBackend.entity.Department;
-import br.com.buttini.roupaBackend.entity.User;
-import br.com.buttini.roupaBackend.repository.UserRepository;
+import br.com.vbuttini.vbuttinirepository.model.UserModel;
+import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class TokenService {
     private UserRepository userRepository;
 
     public String generateToken(Authentication authentication){
-        User user = (User) authentication.getPrincipal();
+        UserModel user = (UserModel) authentication.getPrincipal();
         Date today = new Date();
         Date expirationDate = new Date(today.getTime()+ Long.parseLong(expiration));
 
@@ -53,10 +52,6 @@ public class TokenService {
     public Long getUserId(String token) {
         return Long.parseLong(Jwts.parser().setSigningKey(this.secret)
                 .parseClaimsJws(token).getBody().getSubject());
-    }
-
-    public Department getDepartment(String token){
-        return userRepository.findById(getUserId(token)).get().getDepartment();
     }
     
 }

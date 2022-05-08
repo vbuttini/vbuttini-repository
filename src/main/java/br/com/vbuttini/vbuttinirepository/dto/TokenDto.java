@@ -1,4 +1,4 @@
-package br.com.buttini.roupaBackend.dto;
+package br.com.vbuttini.vbuttinirepository.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,9 +17,5 @@ public class TokenDto {
     private String token;
 
     private String type;
-
-    private DepartmentDto department;
-
-    private Long userId;
 
 }

@@ -1,7 +1,7 @@
-package br.com.buttini.roupaBackend.config.security;
+package br.com.vbuttini.vbuttinirepository.config.security;
 
-import br.com.buttini.roupaBackend.entity.User;
-import br.com.buttini.roupaBackend.repository.UserRepository;
+import br.com.vbuttini.vbuttinirepository.model.UserModel;
+import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,7 +18,6 @@ import java.io.IOException;
 /**
  * @author Vinícius Buttini
  */
-@SuppressWarnings("ALL")
 @Configuration
 @AllArgsConstructor
 public class FilterTokenAuthentificare extends OncePerRequestFilter {
@@ -31,17 +30,15 @@ public class FilterTokenAuthentificare extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String token = retriveToken(request);
-
-        if (tokenService.isValidToken(token)){
+        if (Boolean.TRUE.equals(tokenService.isValidToken(token))){
             authenticateUser(token);
         }
-
         filterChain.doFilter(request,response);
     }
 
     private void authenticateUser(String token) {
         Long userId = tokenService.getUserId(token);
-        User user = userRepository.getById(userId);
+        UserModel user = userRepository.getById(userId);
         UsernamePasswordAuthenticationToken authenticarion = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authenticarion);
     }
