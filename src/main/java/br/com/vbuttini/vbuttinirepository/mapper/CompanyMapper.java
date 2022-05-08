@@ -4,6 +4,9 @@ import br.com.vbuttini.vbuttinirepository.dto.CompanyDto;
 import br.com.vbuttini.vbuttinirepository.model.CompanyModel;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Vinícius Buttini
+ */
 @Component
 public class CompanyMapper {
 

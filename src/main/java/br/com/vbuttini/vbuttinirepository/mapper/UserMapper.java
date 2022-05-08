@@ -5,6 +5,9 @@ import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Vinícius Buttini
+ */
 @Component
 public class UserMapper {
 

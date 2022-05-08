@@ -18,7 +18,7 @@ import java.time.ZoneId;
 public class ResourceExceptionHandler {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
-    private LocalDateTime now = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
+    private final LocalDateTime now = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
 
 
 

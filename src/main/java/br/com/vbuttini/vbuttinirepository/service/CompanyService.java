@@ -18,6 +18,7 @@ public class CompanyService {
     @Autowired
     private CompanyRepository companyRepository;
 
+    @SuppressWarnings("unused")
     public CompanyModel insertByUser(UserModel userModel) {
         CompanyModel companyModel = userModel.getCompany();
         companyModel.setUser(null);

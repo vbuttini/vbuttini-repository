@@ -51,7 +51,7 @@ public class UserService {
     }
 
     private void verifyExistence(String email) {
-        if (userRepository.existsByEmail(email)) {
+        if (Boolean.TRUE.equals(userRepository.existsByEmail(email))) {
             throw new DataBaseException("Usuário já existe!");
         }
     }

@@ -20,14 +20,14 @@ import java.io.IOException;
  */
 @Configuration
 @AllArgsConstructor
-public class FilterTokenAuthentificare extends OncePerRequestFilter {
+public class FilterTokenAuthentication extends OncePerRequestFilter {
 
     private TokenService tokenService;
 
     private UserRepository userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@SuppressWarnings("NullableProblems") HttpServletRequest request, @SuppressWarnings("NullableProblems") HttpServletResponse response, @SuppressWarnings("NullableProblems") FilterChain filterChain) throws ServletException, IOException {
 
         String token = retriveToken(request);
         if (Boolean.TRUE.equals(tokenService.isValidToken(token))){
@@ -39,15 +39,20 @@ public class FilterTokenAuthentificare extends OncePerRequestFilter {
     private void authenticateUser(String token) {
         Long userId = tokenService.getUserId(token);
         UserModel user = userRepository.getById(userId);
-        UsernamePasswordAuthenticationToken authenticarion = new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authenticarion);
+        SecurityContextHolder
+                .getContext()
+                .setAuthentication(
+                        new UsernamePasswordAuthenticationToken(user,null, user.getAuthorities())
+                );
     }
 
     private String retriveToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
+        //noinspection AlibabaUndefineMagicConstant
         if (ObjectUtils.isEmpty(token) || !token.startsWith("Bearer ")){
             return null;
         }
         return token.substring(7);
     }
+
 }

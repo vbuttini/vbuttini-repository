@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="company", schema = "public")
-public class CompanyModel {
+public class CompanyModel{
 
     @Id
     @Column(name="company_id")

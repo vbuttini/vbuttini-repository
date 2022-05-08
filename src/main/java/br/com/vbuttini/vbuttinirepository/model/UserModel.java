@@ -20,7 +20,6 @@ import javax.persistence.Table;
 import java.util.Collection;
 import java.util.Collections;
 
-;
 
 /**
  * @author Vinícius Buttini

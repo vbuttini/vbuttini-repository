@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 /**
  * @author Vinícius Buttini
  */
+@SuppressWarnings("AlibabaServiceOrDaoClassShouldEndWithImpl")
 @Service
-public class AutentificareService implements UserDetailsService {
+public class AuthenticationService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
@@ -20,4 +21,5 @@ public class AutentificareService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
     }
+
 }

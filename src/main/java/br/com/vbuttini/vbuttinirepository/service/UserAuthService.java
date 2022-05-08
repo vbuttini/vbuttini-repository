@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * @author Vinícius Buttini
  */
+@SuppressWarnings("AlibabaTransactionMustHaveRollback")
 @Service
 @Transactional
 public class UserAuthService {
