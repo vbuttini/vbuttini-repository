@@ -1,0 +1,1 @@
+alter table "public".company add column "agent" varchar(100) not null;

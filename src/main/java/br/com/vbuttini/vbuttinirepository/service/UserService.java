@@ -8,10 +8,16 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * @author Vinícius Buttini
  */
+@Service
 public class UserService {
 
     @Autowired
@@ -23,8 +29,16 @@ public class UserService {
     @Autowired
     private UserAuthService userAuthService;
 
-    public UserModel insert(UserModel userModel) {
-        return userRepository.save(userModel);
+    @Autowired
+    private CompanyService companyService;
+
+    public UserDto insert(UserModel userModel) {
+            verifyExistence(userModel.getEmail());
+            userModel.setPassword(new BCryptPasswordEncoder().encode(userModel.getPassword()));
+            userModel.getCompany().setCreatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+            userModel.getCompany().setUser(userModel);
+            return userMapper.convertToDto(userRepository.save(userModel));
+
     }
 
     public UserDto findById(Long id) {
@@ -35,6 +49,12 @@ public class UserService {
 
     public UserDto getUserByAuth() {
         return userAuthService.getAuth();
+    }
+
+    private void verifyExistence(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new RuntimeException("Usuário já existe!");
+        }
     }
 
 }

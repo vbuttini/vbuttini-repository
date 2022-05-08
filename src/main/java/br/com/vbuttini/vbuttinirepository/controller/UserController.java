@@ -19,14 +19,14 @@ import java.net.URI;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserModel> insert(@RequestBody UserModel userModel){
-        userModel = userService.insert(userModel);
+    public ResponseEntity<UserDto> insert(@RequestBody UserModel userModel){
+        UserDto userDto = userService.insert(userModel);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}").buildAndExpand(userModel.getId()).toUri();
-        return ResponseEntity.created(uri).body(userModel);
+                .path("/{id}").buildAndExpand(userDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(userDto);
     }
 
     @GetMapping(value = "/{id}")
