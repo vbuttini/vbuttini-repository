@@ -23,6 +23,7 @@ public class CompanyService {
         companyModel.setUser(null);
         companyModel.setUser(userModel);
         userModel.getCompany().setCreatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        userModel.getCompany().setUpdatedAt(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
         return companyRepository.save(companyModel);
     }
 

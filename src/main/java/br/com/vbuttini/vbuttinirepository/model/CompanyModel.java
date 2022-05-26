@@ -1,5 +1,6 @@
 package br.com.vbuttini.vbuttinirepository.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,9 +46,11 @@ public class CompanyModel{
     @Column(name = "phone", nullable = false)
     private String phone;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-3")
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-3")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
