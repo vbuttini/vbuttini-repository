@@ -5,7 +5,7 @@ import br.com.vbuttini.vbuttinirepository.mapper.UserMapper;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import br.com.vbuttini.vbuttinirepository.service.exception.DataBaseException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,19 +17,14 @@ import java.time.ZoneId;
  * @author Vinícius Buttini
  */
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
-    @Autowired
-    private UserAuthService userAuthService;
-
-    @Autowired
-    private CompanyService companyService;
+    private final UserAuthService userAuthService;
 
     public UserDto insert(UserModel userModel) {
             verifyExistence(userModel.getEmail());

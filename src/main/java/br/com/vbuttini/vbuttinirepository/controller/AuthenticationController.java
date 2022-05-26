@@ -5,7 +5,7 @@ import br.com.vbuttini.vbuttinirepository.dto.TokenDto;
 import br.com.vbuttini.vbuttinirepository.dto.UserDto;
 import br.com.vbuttini.vbuttinirepository.model.LoginForm;
 import br.com.vbuttini.vbuttinirepository.service.UserAuthService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -23,17 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @CrossOrigin
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/auth")
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
-    @Autowired
-    private UserAuthService userAuthService;
+    private final UserAuthService userAuthService;
 
     @PostMapping
     public ResponseEntity<TokenDto> authenticate(@RequestBody

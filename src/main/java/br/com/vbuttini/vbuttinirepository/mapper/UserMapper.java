@@ -2,17 +2,17 @@ package br.com.vbuttini.vbuttinirepository.mapper;
 
 import br.com.vbuttini.vbuttinirepository.dto.UserDto;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
  * @author Vinícius Buttini
  */
 @Component
+@RequiredArgsConstructor
 public class UserMapper {
 
-    @Autowired
-    private CompanyMapper companyMapper;
+    private final CompanyMapper companyMapper;
 
     public UserDto convertToDto(UserModel user) {
         return new UserDto(

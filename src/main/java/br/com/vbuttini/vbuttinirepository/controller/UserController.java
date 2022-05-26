@@ -3,7 +3,7 @@ package br.com.vbuttini.vbuttinirepository.controller;
 import br.com.vbuttini.vbuttinirepository.dto.UserDto;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import br.com.vbuttini.vbuttinirepository.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,11 +21,11 @@ import java.net.URI;
  */
 @CrossOrigin
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping
     public ResponseEntity<UserDto> insert(@RequestBody UserModel userModel){

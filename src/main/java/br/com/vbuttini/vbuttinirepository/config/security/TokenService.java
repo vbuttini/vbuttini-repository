@@ -1,10 +1,9 @@
 package br.com.vbuttini.vbuttinirepository.config.security;
 
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
-import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import java.util.Date;
  * @author Vinícius Buttini
  */
 @Service
+@RequiredArgsConstructor
 public class TokenService {
 
     @Value("${jwt.expiration}")
@@ -22,9 +22,6 @@ public class TokenService {
 
     @Value("${jwt.secret}")
     private String secret;
-
-    @Autowired
-    private UserRepository userRepository;
 
     public String generateToken(Authentication authentication){
         UserModel user = (UserModel) authentication.getPrincipal();

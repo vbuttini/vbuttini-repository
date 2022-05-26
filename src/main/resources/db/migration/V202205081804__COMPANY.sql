@@ -2,6 +2,7 @@ create table "public".company (
    company_id bigint primary key not null,
    "name" varchar(255) not null,
    "cnpj" char(18) not null,
+   "agent" varchar(100) not null,
    "phone" varchar(15) not null,
    "created_at" timestamp not null,
    "updated_at" timestamp,

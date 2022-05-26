@@ -17,10 +17,8 @@ import java.time.ZoneId;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT-3")
     private final LocalDateTime now = LocalDateTime.now(ZoneId.of("America/Sao_Paulo"));
-
-
 
     @ExceptionHandler(DataBaseException.class)
     public ResponseEntity<StandardError> dataBaseException(DataBaseException e, HttpServletRequest request){

@@ -4,25 +4,22 @@ import br.com.vbuttini.vbuttinirepository.dto.UserDto;
 import br.com.vbuttini.vbuttinirepository.mapper.UserMapper;
 import br.com.vbuttini.vbuttinirepository.model.UserModel;
 import br.com.vbuttini.vbuttinirepository.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Vinícius Buttini
  */
 @SuppressWarnings("AlibabaTransactionMustHaveRollback")
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class UserAuthService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     public UserDto getAuth(){
         return userMapper.convertToDto(getAuthModel());
